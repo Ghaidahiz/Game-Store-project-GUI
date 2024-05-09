@@ -372,7 +372,7 @@ public class GEAgamestore {
 				String fullname = GEA.getGameList()[index].getName()+" ";
 				int space = fullname.indexOf(" ");
 				String cutname = fullname.substring(0,space+1);
-				BufferedImage image = ImageIO.read(new File("gamestore_project\\src\\gamestore_project\\img\\"+cutname+".jpg"));
+				BufferedImage image = ImageIO.read(new File("gamestore_project/src/gamestore_project/img/"+cutname+".jpg"));
 				JLabel imageLabel = new JLabel(new ImageIcon(image), SwingConstants.CENTER);
 				gamePanel.add(imageLabel, BorderLayout.CENTER);
 			} catch (IOException e) {
