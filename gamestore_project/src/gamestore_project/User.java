@@ -34,7 +34,7 @@ public class User implements Serializable {
 				if (gameLibrary[i].getName().equalsIgnoreCase(g.getName())) {//to check if it's already in library
 					existsInLibrary = true;
 					System.out.println(" \n SORRY, BUT THIS GAME ALREADY EXISTS IN YOUR LIBRARY :/ ");
-					JOptionPane.showMessageDialog(null,"SORRY, BUT THIS GAME ALREADY EXISTS IN YOUR LIBRARY :/","error", 1);
+					JOptionPane.showMessageDialog(null,"SORRY, BUT THIS GAME ALREADY EXISTS IN YOUR LIBRARY :/","error", JOptionPane.ERROR_MESSAGE);
 
 				}
 			}
@@ -51,7 +51,7 @@ public class User implements Serializable {
 
 				} else {
 					System.out.println("\n YOU DON'T HAVE ENOUGH FUNDS IN YOUR WALLET, CAN'T COMPLETE PURCHASE :( ");
-					JOptionPane.showMessageDialog(null,"YOU DON'T HAVE ENOUGH FUNDS IN YOUR WALLET, CAN'T COMPLETE PURCHASE :( ","error", 1);
+					JOptionPane.showMessageDialog(null,"YOU DON'T HAVE ENOUGH FUNDS IN YOUR WALLET, CAN'T COMPLETE PURCHASE :( ","error",JOptionPane.ERROR_MESSAGE);
 				}
 			} else{
 				System.out.println("\nSORRY, YOUR LIBRARY IS FULL");
@@ -93,7 +93,7 @@ public class User implements Serializable {
 
 				} else {
 					System.out.println("\n YOU DON'T HAVE ENOUGH FUNDS IN YOUR WALLET, CAN'T COMPLETE PURCHASE :( ");
-					JOptionPane.showMessageDialog(null,"YOU DON'T HAVE ENOUGH FUNDS IN YOUR WALLET, CAN'T COMPLETE PURCHASE :( ","error", 1);
+					JOptionPane.showMessageDialog(null,"YOU DON'T HAVE ENOUGH FUNDS IN YOUR WALLET, CAN'T COMPLETE PURCHASE :( ","error", JOptionPane.ERROR_MESSAGE);
 
 					
 				}
@@ -106,23 +106,27 @@ public class User implements Serializable {
 
 
 	public void removeGameFromLibrary(String name) { //this method removes a game from the library
+		String proceed;
 		if(findGame(name)!=null){
 		System.out.println(
 				"\n the game is not refundable, once you remove a game you will lose access to it unless you buy it again..\n");
 		System.out.println("\n do you want to proceed?...\n enter: \n \"y\"- yes, \"n\"- no \n");
-		String proceed = sc.nextLine();//confirmation for the user
-		if (proceed.equalsIgnoreCase("y")) {
+		int result = JOptionPane.showConfirmDialog(null,"the game is not refundable, once you remove a game you will lose access to it unless you buy it again..\n do you want to proceed?...","are you sure?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
+          
+		if (result == JOptionPane.YES_OPTION) {
 			for (int i = 0; i < numberOfGames; i++) { //check if it exists in library
 				if (gameLibrary[i].getName().equalsIgnoreCase(name)) {
 					gameLibrary[i] = gameLibrary[numberOfGames - 1];
 					gameLibrary[--numberOfGames] = null;
 					System.out.println(name + " WAS REMOVED SUCCESSFULLY");
+					JOptionPane.showMessageDialog(null,name + " WAS REMOVED SUCCESSFULLY","success!", 1);
+
 				}
 			}
 		}
-	}		
-  }
+	}		}
+  
 
 	public Game findGame(String name) { //this method finds a game in the library then prints its info 
 		for (int i = 0; i < numberOfGames; i++) {
