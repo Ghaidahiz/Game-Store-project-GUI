@@ -88,7 +88,7 @@ public class User implements Serializable {
 					System.out.println("\n YOUR GIFT ( " + g.getName() + " ) WAS SENT SUCCESSFULLY TO "
 							+ friend.getUsername() + " !!");
 					JOptionPane.showMessageDialog(null," YOUR GIFT ( " + g.getName() + " ) WAS SENT SUCCESSFULLY TO "
-					+ friend.getUsername() + " !!","error", 1);
+					+ friend.getUsername() + " !!","success!!", 1);
 
 
 				} else {
