@@ -348,9 +348,10 @@ public class GEAgamestore {
 		JPanel mainPanel = new JPanel(new BorderLayout()); // Use BorderLayout for the mainPanel
 	
 		// Add welcome message label in the north
+		JPanel welcomePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Use FlowLayout with CENTER alignment
 		JLabel welcomeLabel = new JLabel("Welcome back! Take a look around GEA store", SwingConstants.CENTER);
-		welcomeLabel.setForeground(UIManager.getColor("textText"));
-		mainPanel.add(welcomeLabel, BorderLayout.NORTH);
+		welcomePanel.add(welcomeLabel);
+		mainPanel.add(welcomePanel, BorderLayout.NORTH);
 		Icon profileIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/dancing (1).png");
 		JButton profileButton = new JButton("My Profile",profileIcon);
 		profileButton.addActionListener(new ActionListener() {
@@ -455,11 +456,16 @@ public class GEAgamestore {
 	
 		// Add welcome message label in the north
 		Icon profileIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/boy.png");
+		Icon walletIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/money-bag (1).png");
 		String sWallet = GEA.findUser(user).getWallet() + "";
+		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Use FlowLayout with CENTER alignment
+		JLabel GELABEL11 = new JLabel("User: " + user, profileIcon, SwingConstants.CENTER);
+		JLabel GELABEL22 = new JLabel("Wallet: " + sWallet.substring(0, (sWallet.indexOf('.') + 2)), walletIcon, SwingConstants.CENTER);
+		titlePanel.add(GELABEL11);
+		titlePanel.add(GELABEL22);
 
-		JLabel GELABEL1 = new JLabel("User: " + user +"  "+ "Wallet: " + sWallet.substring(0, (sWallet.indexOf('.') + 2)), profileIcon, SwingConstants.CENTER);
-		GELABEL1.setForeground(UIManager.getColor("textText"));
-		mainPanel.add(GELABEL1, BorderLayout.NORTH);
+		mainPanel.add(titlePanel, BorderLayout.NORTH);
+
 		Icon homeIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/home.png");
 		JButton homeButton = new JButton("Go Home",homeIcon);
 		homeButton.addActionListener(new ActionListener() {
@@ -474,8 +480,8 @@ public class GEAgamestore {
 
 		// Create a panel for the game grid
 		JPanel gameGridPanel = new JPanel(new GridLayout(0, 3, 10, 10)); // 3 columns, variable rows, and 10 pixels gap
-		JLabel GELABEL = new JLabel("                ", SwingConstants.CENTER);
-		JLabel GELABEL2 = new JLabel("               ", SwingConstants.CENTER);
+		//JLabel GELABEL = new JLabel("                ", SwingConstants.CENTER);
+		//JLabel GELABEL2 = new JLabel("               ", SwingConstants.CENTER);
 
 		//gameGridPanel.add(GELABEL,BorderLayout.NORTH);
 		//gameGridPanel.add(GELABEL1,BorderLayout.WEST);
