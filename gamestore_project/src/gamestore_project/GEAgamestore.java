@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -350,9 +351,20 @@ public class GEAgamestore {
 		JLabel welcomeLabel = new JLabel("Welcome back! Take a look around GEA store", SwingConstants.CENTER);
 		welcomeLabel.setForeground(UIManager.getColor("textText"));
 		mainPanel.add(welcomeLabel, BorderLayout.NORTH);
-		//JLabel wallet = new JLabel("Wallet amount: "+ GEA.findUser(user).getWallet(), SwingConstants.CENTER);
-		//mainPanel.add(wallet, BorderLayout.SOUTH);
+		Icon profileIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/dancing (1).png");
+		JButton profileButton = new JButton("My Profile",profileIcon);
+		profileButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchToLibrary();
+			}
+			
+		});
 
+		mainPanel.add(profileButton,BorderLayout.EAST);
+
+
+
+		
 	
 		// Create a panel for the game grid
 		JPanel gameGridPanel = new JPanel(new GridLayout(0, 3, 10, 10)); // 3 columns, variable rows, and 10 pixels gap
@@ -366,7 +378,7 @@ public class GEAgamestore {
 			// Add label for the game name at the top
 			JLabel gameNameLabel = new JLabel(GEA.getGameList()[index].getName(), SwingConstants.CENTER);
 			gamePanel.add(gameNameLabel, BorderLayout.NORTH);
-	
+
 			try {
 				// Load and add the image icon to the center
 				String fullname = GEA.getGameList()[index].getName()+" ";
@@ -383,7 +395,11 @@ public class GEAgamestore {
 			JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5)); // 1 row, 2 columns, and 5 pixels gap
 	
 			// Add "Buy" button
-			JButton buyButton = new JButton("Buy");
+			Icon buyicon = new ImageIcon("gamestore_project/src/gamestore_project/img/payment.png");
+			Icon gifticon = new ImageIcon("gamestore_project/src/gamestore_project/img/gift.png");
+
+			JButton buyButton = new JButton("",buyicon);
+			
 			buyButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					(GEA.findUser(user)).buyGame(GEA.getGameList()[index]);
@@ -395,7 +411,122 @@ public class GEAgamestore {
 
 	
 			// Add "Gift" button
-			JButton giftButton = new JButton("Gift");
+			JButton giftButton = new JButton("",gifticon);
+			giftButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String Fname =JOptionPane.showInputDialog("Enter your friend's name");
+					if (GEA.findUser(Fname) == null) { //if the friend wasn't found, it'll print a message
+					JOptionPane.showMessageDialog(mainPanel, "SORRY.. COULDN'T FIND USER \"" + Fname + "\""+"", "error", 1);
+					//System.out.println("SORRY.. COULDN'T FIND USER \"" + Fname + "\"");
+				} else {// if the friend was found (in users), the games of the store will be displayed, then the user will be asked to enter a game to send
+					GEA.findUser(user).sendGift(GEA.findUser(Fname),GEA.getGameList()[index] ); //the game will be bought and sent to the friend library if it exists in the store (see methods)
+				
+				}
+		}
+			});
+			buttonPanel.add(giftButton);
+	
+			// Add the button panel to the bottom of the game panel
+			gamePanel.add(buttonPanel, BorderLayout.SOUTH);
+	
+			// Add the game panel to the game grid panel
+			gameGridPanel.add(gamePanel);
+		}
+	
+		// Create JScrollPane for the game grid panel
+		JScrollPane scrollPane = new JScrollPane(gameGridPanel,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	
+		// Add the game grid panel with scroll pane to the center of the main panel
+		mainPanel.add(scrollPane, BorderLayout.CENTER);
+	
+		// Set up frame's content pane
+		frame.getContentPane().removeAll();
+		frame.getContentPane().setLayout(new BorderLayout());
+		frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+	
+		// Revalidate and repaint the frame
+		frame.revalidate();
+		frame.repaint();
+	}
+	public void switchToLibrary() {
+		JPanel mainPanel = new JPanel(new BorderLayout()); // Use BorderLayout for the mainPanel
+	
+		// Add welcome message label in the north
+		Icon profileIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/boy.png");
+		String sWallet = GEA.findUser(user).getWallet() + "";
+
+		JLabel GELABEL1 = new JLabel("User: " + user +"  "+ "Wallet: " + sWallet.substring(0, (sWallet.indexOf('.') + 2)), profileIcon, SwingConstants.CENTER);
+		GELABEL1.setForeground(UIManager.getColor("textText"));
+		mainPanel.add(GELABEL1, BorderLayout.NORTH);
+		Icon homeIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/home.png");
+		JButton homeButton = new JButton("Go Home",homeIcon);
+		homeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchToMainPanel();
+			}
+			
+		});
+
+		mainPanel.add(homeButton,BorderLayout.EAST);
+
+
+		// Create a panel for the game grid
+		JPanel gameGridPanel = new JPanel(new GridLayout(0, 3, 10, 10)); // 3 columns, variable rows, and 10 pixels gap
+		JLabel GELABEL = new JLabel("                ", SwingConstants.CENTER);
+		JLabel GELABEL2 = new JLabel("               ", SwingConstants.CENTER);
+
+		//gameGridPanel.add(GELABEL,BorderLayout.NORTH);
+		//gameGridPanel.add(GELABEL1,BorderLayout.WEST);
+		//gameGridPanel.add(GELABEL2,BorderLayout.CENTER);
+
+
+		for (int i = 0; i < GEA.findUser(user).getNumberOfGames(); i++) {
+			final int index = i; // Capture the value of i in a final variable
+	
+			// Create a panel for each game
+			JPanel gamePanel = new JPanel();
+			gamePanel.setLayout(new BorderLayout());
+	
+			// Add label for the game name at the top
+			JLabel gameNameLabel = new JLabel(GEA.findUser(user).getGameLibrary()[index].getName(), SwingConstants.CENTER);
+			gamePanel.add(gameNameLabel, BorderLayout.NORTH);
+	
+	
+			try {
+				// Load and add the image icon to the center
+				String fullname = GEA.findUser(user).getGameLibrary()[index].getName()+" ";
+				int space = fullname.indexOf(" ");
+				String cutname = fullname.substring(0,space+1);
+				BufferedImage image = ImageIO.read(new File("gamestore_project/src/gamestore_project/img/"+cutname+".jpg"));
+				JLabel imageLabel = new JLabel(new ImageIcon(image), SwingConstants.CENTER);
+				gamePanel.add(imageLabel, BorderLayout.CENTER);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
+			// Create a panel for buy and gift buttons
+			JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5)); // 1 row, 2 columns, and 5 pixels gap
+	
+			// Add "Buy" button
+			Icon buyicon = new ImageIcon("gamestore_project/src/gamestore_project/img/payment.png");
+			Icon gifticon = new ImageIcon("gamestore_project/src/gamestore_project/img/gift.png");
+
+			JButton buyButton = new JButton("",buyicon);
+			
+			buyButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					(GEA.findUser(user)).buyGame(GEA.getGameList()[index]);
+				}
+				
+			});
+
+			buttonPanel.add(buyButton);
+
+	
+			// Add "Gift" button
+			JButton giftButton = new JButton("",gifticon);
 			giftButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String Fname =JOptionPane.showInputDialog("Enter your friend's name");
