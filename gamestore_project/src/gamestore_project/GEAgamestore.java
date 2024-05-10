@@ -370,6 +370,27 @@ public class GEAgamestore {
 				gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 				frame3.getContentPane().setLayout(gridBagLayout);
                 frame3.setVisible(true);
+
+				JLabel label_11 = new JLabel("Pleas enter your name:");
+				GridBagConstraints gbc_label_11 = new GridBagConstraints();
+				gbc_label_11.fill = GridBagConstraints.BOTH;
+				gbc_label_11.insets = new Insets(0, 0, 5, 0);
+				gbc_label_11.gridx = 1;
+				gbc_label_11.gridy = 0;
+
+				frame3.getContentPane().add(label_11,gbc_label_11);
+			
+
+			    JTextField textField_1=new JTextField();
+				GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+				gbc_textField_1.fill=GridBagConstraints.HORIZONTAL;
+				gbc_textField_1.insets= new Insets(0, 0, 5, 5);
+                gbc_textField_1.gridx=1;
+				gbc_textField_1.gridy=1;
+
+				frame3.getContentPane().add(textField_1, gbc_textField_1);
+
+
 			}
 			
 		});
