@@ -87,7 +87,7 @@ public class GEAgamestore {
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
+								}
 			}
 		});
 	}
@@ -164,7 +164,7 @@ public class GEAgamestore {
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 1;
 		gbc_lblNewLabel_3.gridy = 2;
-		frame.getContentPane().add(Gealabel, gbc_lblNewLabel_3);
+		frame.getContentPane().add(Gealabel,gbc_lblNewLabel_3);
 
 		JLabel lblNewLabel_1 = new JLabel("Welcome to GEA gamestore");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -211,13 +211,13 @@ public class GEAgamestore {
 
 		JButton btnNewButton_1 = new JButton("USER");
 
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnNewButton_1.addActionListener(new ActionListener() {  /////////////////////////////////////
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame2 = new JFrame();
 				frame2.setBounds(450, 300, 450, 300);
 				frame2.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				GridBagLayout gridBagLayout = new GridBagLayout();
-				gridBagLayout.columnWidths = new int[] { 150, 150, 150, 0 };
+				gridBagLayout.columnWidths = new int[] { 150, 150, 150, 0};
 				gridBagLayout.rowHeights = new int[] { 90, 90, 90, 0 };
 				gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 				gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -358,6 +358,21 @@ public class GEAgamestore {
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 9;
 		frame.getContentPane().add(btnNewButton, gbc_btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				JFrame frame3 = new JFrame();
+				frame3.setBounds(450, 300, 450, 300);
+				frame3.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				GridBagLayout gridBagLayout = new GridBagLayout();
+				gridBagLayout.columnWidths = new int[] { 150, 150, 150, 0};
+				gridBagLayout.rowHeights = new int[] { 90, 90, 90, 0 };
+				gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				frame3.getContentPane().setLayout(gridBagLayout);
+                frame3.setVisible(true);
+			}
+			
+		});
 
 		JLabel label_8 = new JLabel("");
 		GridBagConstraints gbc_label_8 = new GridBagConstraints();
