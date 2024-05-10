@@ -3,6 +3,8 @@ package gamestore_project;
 
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 public class GameStore {
    // GameStore is the fundamental class that deals with Games, Users, and Admins,
    // and handles the store's operations
@@ -77,52 +79,33 @@ public class GameStore {
 
    }
 
-   public boolean adminExists() {//this method verifies admin's username and password, and allows the user to go back to the main menu 
-      boolean adminExist = false;//there is a limit for incorrect login attempts 
-      int i, numOfAttempts = 0;
-      String name;
-      boolean back = false;
-
-      do {
-
-         System.out.println("\n PLEASE ENTER YOUR NAME \n OR 0 TO GO BACK :");
-         name = sc.nextLine();
-         if (!name.equals("0")) {        //we use the user input in the variable (name) as a back button if  
-            for (i = 0; i < adminList.length; i++) //the input was zero
-               if (adminList[i].getUsername().equalsIgnoreCase(name)) { //if the entered username exists in adminlist, then the admin exists
-                  adminExist = true;
-                  break;
-               }
-            if (!adminExist) { //if not, it will print a message
-               System.out.println(" INCORRECT USERNAME, PLEASE TRY AGAIN");
-               numOfAttempts++;
-               continue;
-            } else { //this will check the password after verifying that the admin exists
-               System.out.println("\n WELCOME BACK!, PLEASE ENTER YOUR PASSWORD");
-               String password = sc.nextLine();
-               if (adminList[i].getPassword().equals(password))
-                  break; //this will stop the verification loop
-               else {
-                  System.out.println("INCORRECT PASSWORD");
-                     numOfAttempts++;
-                     adminExist = false;
-               }
-
+   public boolean adminExists(String name, String password) {//this method verifies admin's username and password, and allows the user to go back to the main menu 
+   boolean adminExist = false; 
+   int i; 
+         for (i = 0; i < adminList.length; i++)
+            if (adminList[i].getUsername().equalsIgnoreCase(name)) { //if the entered username exists in adminlist, then the admin exists
+               adminExist = true;
+               break;
             }
-         } else //if name equals "0"
-            back = true;
-      } while (!adminExist && numOfAttempts < 3 && back == false); //the loop will stop if the admin's info was correct
-      if (adminExist) {                                           // or attempts >= 3 or "back" was true (user entered 0)
-         System.out.print(" HELLO ADMIN " + name + " :)");
-         return true;
-      } else if (numOfAttempts >= 3) {
-         System.out.println("\n SORRY YOU HAVE EXCEEDED THE NUMBER OF ALLOWABLE ATTEMPTS :(");
-         return false;
-      }
-      return false;
+         if (!adminExist) { //if not, it will print a message
+            System.out.println(" INCORRECT USERNAME, PLEASE TRY AGAIN");
+            JOptionPane.showMessageDialog(null, "INCORRECT USERNAME, PLEASE TRY AGAIN", "oh no!", 1);
+            return false;
 
-   }
+         } else { //this will check the password after verifying that the admin exists
 
+            if (adminList[i].getPassword().equals(password)){
+               JOptionPane.showMessageDialog(null, "WELCOME BACK ADMIN " + name.toUpperCase(), "welcome!", 1);
+               return true; //this will stop the verification loop
+            }
+            else {
+               System.out.println("INCORRECT PASSWORD");
+               JOptionPane.showMessageDialog(null, "INCORRECT PASSWORD, PLEASE TRY AGAIN", "oh no!", 1);
+                 return false;
+            }
+         }
+
+}
    public boolean gameExists(String name) { //check if game exists in the store
       for (int i = 0; i < noGames; i++) {
          if (gameList[i].getName().equalsIgnoreCase(name))
@@ -179,9 +162,12 @@ public class GameStore {
          gameList[noGames - 1] = null;
          noGames--;
          System.out.println("THE GAME \"" + name + "\" WAS REMOVED SUCCESSFULLY");
+         JOptionPane.showMessageDialog(null, "THE GAME \"" + name + "\" WAS REMOVED SUCCESSFULLY", "Success!", JOptionPane.INFORMATION_MESSAGE);
 
-      } else
+      } else{
          System.out.println("\nFAILED TO REMOVE THE GAME, CAN NOT FIND A GAME WITH THIS NAME: \"" + name + "\"");
+         JOptionPane.showMessageDialog(null, "FAILED TO REMOVE THE GAME, CAN NOT FIND A GAME WITH THIS NAME:" + name  , "Error", JOptionPane.ERROR_MESSAGE);
+      }
    }
 
    public Game searchForGame(String name) { //this method returns the game that has the recieved name
