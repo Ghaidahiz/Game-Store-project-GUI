@@ -1421,66 +1421,65 @@ public class GEAgamestore {
 				SwingConstants.CENTER);
 		JLabel GELABEL44 = new JLabel("                                                                         ",
 				SwingConstants.CENTER);
-				Icon filterIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/filter (1).png");
-				JButton filter = new JButton("", filterIcon);
-				filter.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) { // if the user decided to filter games by genre
-						FlowLayout flow = new FlowLayout();
-						JPanel genrePanel = new JPanel(flow);
-		
-						String[] genres = { "", "Horror", "RPG", "Story-Rich", "Detective", "Survival" };
-		
-						JComboBox<String> comboBox = new JComboBox<>(genres); // this is a drop down list containing the
-																				// genres in order to initialize the new
-																				// game
-		
-						comboBox.setBounds(196, 209, 153, 27);
-						JLabel lblGenre = new JLabel("Genre:");
-						lblGenre.setBounds(138, 213, 47, 16);
-		
-						genrePanel.add(lblGenre);
-						genrePanel.add(comboBox);
-		
-						int result = JOptionPane.showConfirmDialog(null, genrePanel, "filter by game genre",
-								JOptionPane.OK_CANCEL_OPTION);
-		
-						if (result == JOptionPane.OK_OPTION) {
-							String genre = (String) comboBox.getSelectedItem();// this line stores the user's genre
-																				// choice in a string
-		
-							if (!genre.isEmpty()) {
-								switch (genre) {
-								case "Horror":
-									displayGames(GEA.getHorror());
-									break;
-								case "RPG":
-									displayGames(GEA.getRPG());
-									break;
-								case "Story-Rich":
-									displayGames(GEA.getStoryRich());
-									break;
-								case "Detective":
-									displayGames(GEA.getDetective());
-									break;
-								case "Survival":
-								displayGames(GEA.getSurvival());
-								break;
-								}
-							} else {
-								JOptionPane.showMessageDialog(null, "Please choose a genre", "Oops", JOptionPane.ERROR_MESSAGE); // if
-																																	// admin
-																																	// didn't
-																																	// choose
-																																	// a
-																																	// genre
-							}
-		
+		Icon filterIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/filter (1).png");
+		JButton filter = new JButton("", filterIcon);
+		filter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { // if the user decided to filter games by genre
+				FlowLayout flow = new FlowLayout();
+				JPanel genrePanel = new JPanel(flow);
+
+				String[] genres = { "", "Horror", "RPG", "Story-Rich", "Detective", "Survival" };
+
+				JComboBox<String> comboBox = new JComboBox<>(genres); // this is a drop down list containing the
+																		// genres in order to initialize the new
+																		// game
+
+				comboBox.setBounds(196, 209, 153, 27);
+				JLabel lblGenre = new JLabel("Genre:");
+				lblGenre.setBounds(138, 213, 47, 16);
+
+				genrePanel.add(lblGenre);
+				genrePanel.add(comboBox);
+
+				int result = JOptionPane.showConfirmDialog(null, genrePanel, "filter by game genre",
+						JOptionPane.OK_CANCEL_OPTION);
+
+				if (result == JOptionPane.OK_OPTION) {
+					String genre = (String) comboBox.getSelectedItem();// this line stores the user's genre
+																		// choice in a string
+
+					if (!genre.isEmpty()) {
+						switch (genre) {
+						case "Horror":
+							displayGames(GEA.getHorror());
+							break;
+						case "RPG":
+							displayGames(GEA.getRPG());
+							break;
+						case "Story-Rich":
+							displayGames(GEA.getStoryRich());
+							break;
+						case "Detective":
+							displayGames(GEA.getDetective());
+							break;
+						case "Survival":
+							displayGames(GEA.getSurvival());
+							break;
 						}
-		
+					} else {
+						JOptionPane.showMessageDialog(null, "Please choose a genre", "Oops", JOptionPane.ERROR_MESSAGE); // if
+																															// admin
+																															// didn't
+																															// choose
+																															// a
+																															// genre
 					}
-				});
-		
-		
+
+				}
+
+			}
+		});
+
 		welcomePanel.add(GELABEL33);
 		welcomePanel.add(welcomeLabel);
 		welcomePanel.add(GELABEL44);
