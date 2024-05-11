@@ -204,13 +204,13 @@ public class GEAgamestore {
 			String fullname = GEA.getGameList()[index].getName() + " ";
 			int space = fullname.indexOf(" ");
 			String cutname = fullname.substring(0, space + 1);
-			Icon gamepic = new ImageIcon("gamestore_project/src/gamestore_project/img/" + cutname + ".jpg");
-			File gamefile = new File("gamestore_project/src/gamestore_project/img/" + cutname + ".jpg");
+			Icon gamepic = new ImageIcon("gamestore_project/src/gamestore_project/img/" + cutname + ".png");
+			File gamefile = new File("gamestore_project/src/gamestore_project/img/" + cutname + ".png");
 			if (gamefile.exists()) {
 				JLabel imageLabel = new JLabel(gamepic, SwingConstants.CENTER);
 				gamePanel.add(imageLabel, BorderLayout.CENTER);
 			} else {
-				Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1.png");
+				Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1 .png");
 				JLabel imageLabel1 = new JLabel(defaultpic, SwingConstants.CENTER);
 				gamePanel.add(imageLabel1, BorderLayout.CENTER);
 			}
@@ -354,13 +354,13 @@ public class GEAgamestore {
 			String fullname = GEA.findUser(user).getGameLibrary()[index].getName() + " ";
 			int space = fullname.indexOf(" ");
 			String cutname = fullname.substring(0, space + 1);
-			Icon gamepic = new ImageIcon("gamestore_project/src/gamestore_project/img/" + cutname + ".jpg");
-			File gamefile = new File("gamestore_project/src/gamestore_project/img/" + cutname + ".jpg");
+			Icon gamepic = new ImageIcon("gamestore_project/src/gamestore_project/img/" + cutname + ".png");
+			File gamefile = new File("gamestore_project/src/gamestore_project/img/" + cutname + ".png");
 			if (gamefile.exists()) {
 				JLabel imageLabel = new JLabel(gamepic, SwingConstants.CENTER);
 				gamePanel.add(imageLabel, BorderLayout.CENTER);
 			} else {
-				Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1.png");
+				Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1 .png");
 				JLabel imageLabel1 = new JLabel(defaultpic, SwingConstants.CENTER);
 				gamePanel.add(imageLabel1, BorderLayout.CENTER);
 			}
@@ -483,13 +483,13 @@ public class GEAgamestore {
 		String fullname = g.getName() + " ";
 		int space = fullname.indexOf(" ");
 		String cutname = fullname.substring(0, space + 1);
-		Icon gamepic = new ImageIcon("gamestore_project/src/gamestore_project/img/" + cutname + ".jpg");
-		File gamefile = new File("gamestore_project/src/gamestore_project/img/" + cutname + ".jpg");
+		Icon gamepic = new ImageIcon("gamestore_project/src/gamestore_project/img/" + cutname + ".png");
+		File gamefile = new File("gamestore_project/src/gamestore_project/img/" + cutname + ".png");
 		if (gamefile.exists()) {
 			JLabel imageLabel = new JLabel(gamepic, SwingConstants.CENTER);
 			gamePanel.add(imageLabel, BorderLayout.CENTER);
 		} else {
-			Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1.png");
+			Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1 .png");
 			JLabel imageLabel1 = new JLabel(defaultpic, SwingConstants.CENTER);
 			gamePanel.add(imageLabel1, BorderLayout.CENTER);
 		}
@@ -540,7 +540,7 @@ public class GEAgamestore {
 		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Use FlowLayout with CENTER alignment
 		JLabel GELABEL11 = new JLabel("Admin: " + adminName + "  ", adminIcon, SwingConstants.CENTER);
 		JLabel GELABEL33 = new JLabel(
-				"                                                                                                                                                   ",
+				"                                                                                                                                                                                         ",
 				SwingConstants.CENTER);
 		Icon addIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/add.png");
 
@@ -698,13 +698,13 @@ public class GEAgamestore {
 			String fullname = GEA.getGameList()[index].getName() + " ";
 			int space = fullname.indexOf(" ");
 			String cutname = fullname.substring(0, space + 1);
-			Icon gamepic = new ImageIcon("gamestore_project/src/gamestore_project/img/" + cutname + ".jpg");
-			File gamefile = new File("gamestore_project/src/gamestore_project/img/" + cutname + ".jpg");
+			Icon gamepic = new ImageIcon("gamestore_project/src/gamestore_project/img/" + cutname + ".png");
+			File gamefile = new File("gamestore_project/src/gamestore_project/img/" + cutname + ".png");
 			if (gamefile.exists()) {
 				JLabel imageLabel = new JLabel(gamepic, SwingConstants.CENTER);
 				gamePanel.add(imageLabel, BorderLayout.CENTER);
 			} else {
-				Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1.png");
+				Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1 .png");
 				JLabel imageLabel1 = new JLabel(defaultpic, SwingConstants.CENTER);
 				gamePanel.add(imageLabel1, BorderLayout.CENTER);
 			}
@@ -764,7 +764,7 @@ public class GEAgamestore {
 		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Use FlowLayout with CENTER alignment
 		JLabel GELABEL11 = new JLabel("Admin: " + adminName + "  ", adminIcon, SwingConstants.CENTER);
 		JLabel GELABEL33 = new JLabel(
-				"                                                                                                                                                   ",
+				"                                                                                                                                                                                         ",
 				SwingConstants.CENTER);
 		Icon addIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/add.png");
 
@@ -909,7 +909,7 @@ public class GEAgamestore {
 		JLabel crownlbl = new JLabel("");
 		springLayout.putConstraint(SpringLayout.NORTH, crownlbl, 88, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, crownlbl, 406, SpringLayout.WEST, frame.getContentPane());
-		crownlbl.setIcon(new ImageIcon("/Users/ghaida/Downloads/crown.png"));
+		crownlbl.setIcon(new ImageIcon("gamestore_project/src/gamestore_project/img/crown.png"));
 		panel.add(crownlbl);
 		
 		JLabel GEEAA = new JLabel("GEA GAMESTORE");
@@ -1058,7 +1058,6 @@ public class GEAgamestore {
 		adminButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame3 = new JFrame();
-				frame3.setIconImage(Toolkit.getDefaultToolkit().getImage("/Users/ghaida/Downloads/crown.png"));
 				frame3.getContentPane().setBackground(UIManager.getColor("window"));
 				SpringLayout springLayout = new SpringLayout();
 				frame3.getContentPane().setLayout(springLayout);
@@ -1119,7 +1118,7 @@ public class GEAgamestore {
 				springLayout.putConstraint(SpringLayout.EAST, blank, -433, SpringLayout.EAST, frame3.getContentPane());
 				springLayout.putConstraint(SpringLayout.WEST, msg, 25, SpringLayout.EAST, blank);
 				springLayout.putConstraint(SpringLayout.NORTH, blank, 48, SpringLayout.NORTH, frame3.getContentPane());
-				blank.setIcon(new ImageIcon("/Users/ghaida/Downloads/disco-ball.png"));
+				blank.setIcon(new ImageIcon("gamestore_project/src/gamestore_project/img/disco-ball.png"));
 				frame3.getContentPane().add(blank);
 				frame3.setBackground(new Color(45, 45, 45));
 				frame3.setBounds(450, 300, 546, 351);
