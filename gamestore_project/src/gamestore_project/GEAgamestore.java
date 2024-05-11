@@ -235,7 +235,7 @@ public class GEAgamestore {
 				gamePanel.add(imageLabel1, BorderLayout.CENTER);
 			}
 
-			JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5)); 
+			JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
 
 			Icon buyicon = new ImageIcon("gamestore_project/src/gamestore_project/img/payment.png");
 			Icon gifticon = new ImageIcon("gamestore_project/src/gamestore_project/img/gift.png");
@@ -488,7 +488,7 @@ public class GEAgamestore {
 		btns.add(logoutButton);
 		mainPanel.add(btns, BorderLayout.EAST);
 
-		JPanel gameGridPanel = new JPanel(new GridLayout(3, 3, 10, 10)); 
+		JPanel gameGridPanel = new JPanel(new GridLayout(3, 3, 10, 10));
 
 		JPanel gamePanel = new JPanel();
 		gamePanel.setLayout(new BorderLayout());
@@ -702,7 +702,7 @@ public class GEAgamestore {
 		btns.add(logoutButton);
 		mainPanel.add(btns, BorderLayout.EAST);
 
-		JPanel gameGridPanel = new JPanel(new GridLayout(0, 3, 10, 10)); 
+		JPanel gameGridPanel = new JPanel(new GridLayout(0, 3, 10, 10));
 		for (int i = 0; i < GEA.getNoGames(); i++) {
 			final int index = i;
 
@@ -733,7 +733,7 @@ public class GEAgamestore {
 				gamePanel.add(imageLabel1, BorderLayout.CENTER);
 			}
 
-			JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5)); 
+			JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
 
 			Icon removeIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/cancel.png");
 			JLabel blannk = new JLabel("");
@@ -742,7 +742,8 @@ public class GEAgamestore {
 			JButton removeButton = new JButton("", removeIcon);
 
 			removeButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) { //this button allows the admin to remove a game from the store
+				public void actionPerformed(ActionEvent e) { // this button allows the admin to remove a game from the
+																// store
 					GEA.removeGame(GEA.getGameList()[index].getName());
 					switchToAdminPanel1();
 				}
@@ -780,7 +781,8 @@ public class GEAgamestore {
 		// these methods to make sure that the panel switches and updates correctly ^^
 	}
 
-	public void switchToAdminPanel2() {// switches to the admin users page where they can manage the store's users account
+	public void switchToAdminPanel2() {// switches to the admin users page where they can manage the store's users
+										// account
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		Icon adminIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/mask.png");
 		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Use FlowLayout with CENTER alignment
@@ -799,9 +801,9 @@ public class GEAgamestore {
 				try { // checks if the user already exists in the store and validates the wallet input
 					if (GEA.findUser(inUser) != null) {
 						throw new UserAlreadyExists(); // user defined exception
-					} else if (inUser == null || inUser.isEmpty()) {//if the admin didn't enter anything
+					} else if (inUser == null || inUser.isEmpty()) {// if the admin didn't enter anything
 						JOptionPane.showMessageDialog(null, "please enter the user's name", "Oh no :(", 0);
-					} else { //validates the wallet
+					} else { // validates the wallet
 						String walletamt = JOptionPane.showInputDialog("Enter the user's wallet amount");
 						double walletamtt = Double.parseDouble(walletamt);
 						if (walletamtt < 0) {
@@ -830,7 +832,7 @@ public class GEAgamestore {
 
 		Icon gamesIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/games.png");
 		JButton gameButton = new JButton("Games", gamesIcon);
-		gameButton.addActionListener(new ActionListener() {//to switch to the games pages
+		gameButton.addActionListener(new ActionListener() {// to switch to the games pages
 			public void actionPerformed(ActionEvent e) {
 				switchToAdminPanel1();
 			}
@@ -838,7 +840,7 @@ public class GEAgamestore {
 		});
 		Icon logoutIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/angel.png");
 		JButton logoutButton = new JButton("LOGOUT", logoutIcon);
-		logoutButton.addActionListener(new ActionListener() {//log out for the admin
+		logoutButton.addActionListener(new ActionListener() {// log out for the admin
 			public void actionPerformed(ActionEvent e) {
 				switchToLoginPage();
 			}
@@ -850,8 +852,8 @@ public class GEAgamestore {
 		btns.add(logoutButton);
 		mainPanel.add(btns, BorderLayout.EAST);
 
-		JPanel userGridPanel = new JPanel(new GridLayout(0, 3, 10, 10)); 
-		for (int i = 0; i < GEA.getNoUsers(); i++) { //displays the users of the store and their information
+		JPanel userGridPanel = new JPanel(new GridLayout(0, 3, 10, 10));
+		for (int i = 0; i < GEA.getNoUsers(); i++) { // displays the users of the store and their information
 			final int index = i;
 
 			JPanel userPanel = new JPanel();
@@ -868,7 +870,7 @@ public class GEAgamestore {
 			JLabel imageLabel = new JLabel(userpic, SwingConstants.CENTER);
 			userPanel.add(imageLabel, BorderLayout.CENTER);
 
-			JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5)); 
+			JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
 
 			Icon removeIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/cancel.png");
 
@@ -877,7 +879,8 @@ public class GEAgamestore {
 			JLabel blannkk = new JLabel("");
 
 			removeButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) { //this button allows the admin to remove a user's account from the store
+				public void actionPerformed(ActionEvent e) { // this button allows the admin to remove a user's account
+																// from the store
 					GEA.removeUser(GEA.getUserList()[index].getUsername());
 					switchToAdminPanel2();
 				}
@@ -961,115 +964,117 @@ public class GEAgamestore {
 															// the user enter the username, then checks if the
 															// user already exists, and shows a message accordingly. the
 															// user then will enter the shop or create a new account.
-			public void actionPerformed(ActionEvent e) { //open the frame for user login
+			public void actionPerformed(ActionEvent e) { // open the frame for user login
 				JFrame frame2 = new JFrame();
-				frame2.setBounds(450, 300, 450, 300);
-				frame2.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				GridBagLayout gridBagLayout = new GridBagLayout();
-				gridBagLayout.columnWidths = new int[] { 150, 150, 150, 0 };
-				gridBagLayout.rowHeights = new int[] { 90, 90, 90, 0 };
-				gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
-				gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
-				frame2.getContentPane().setLayout(gridBagLayout);
+				frame2.setResizable(false);
+				frame2.getContentPane().setBackground(UIManager.getColor("window"));
+				SpringLayout springLayout = new SpringLayout();
+				frame2.getContentPane().setLayout(springLayout);
 
-				JLabel label = new JLabel("");
-				GridBagConstraints gbc_label = new GridBagConstraints();
-				gbc_label.fill = GridBagConstraints.BOTH;
-				gbc_label.insets = new Insets(0, 0, 5, 5);
-				gbc_label.gridx = 0;
-				gbc_label.gridy = 0;
-				frame2.getContentPane().add(label, gbc_label);
+				JLabel msg = new JLabel("Hello user, please enter your information");
+				springLayout.putConstraint(SpringLayout.NORTH, msg, 74, SpringLayout.NORTH, frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.SOUTH, msg, 90, SpringLayout.NORTH, frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.EAST, msg, -102, SpringLayout.EAST, frame2.getContentPane());
+				msg.setForeground(UIManager.getColor("textText"));
+				frame2.getContentPane().add(msg);
 
-				JLabel lblNewLabel = new JLabel("Hello, please enter your username");
-				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-				gbc_lblNewLabel.anchor = GridBagConstraints.SOUTH;
-				gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
-				gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel.gridx = 1;
-				gbc_lblNewLabel.gridy = 0;
-				frame2.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+				JLabel adminLabel = new JLabel("username:");
+				springLayout.putConstraint(SpringLayout.NORTH, adminLabel, -130, SpringLayout.SOUTH,
+						frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.WEST, adminLabel, 94, SpringLayout.WEST,
+						frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.SOUTH, adminLabel, -114, SpringLayout.SOUTH,
+						frame2.getContentPane());
+				adminLabel.setForeground(UIManager.getColor("textText"));
+				frame2.getContentPane().add(adminLabel);
+				JTextField userfield = new JTextField();
 
-				JLabel label_1 = new JLabel("");
-				GridBagConstraints gbc_label_1 = new GridBagConstraints();
-				gbc_label_1.fill = GridBagConstraints.BOTH;
-				gbc_label_1.insets = new Insets(0, 0, 5, 0);
-				gbc_label_1.gridx = 2;
-				gbc_label_1.gridy = 0;
-				frame2.getContentPane().add(label_1, gbc_label_1);
+				adminLabel.setLabelFor(userfield);
 
-				JTextField textfield = new JTextField();
-				GridBagConstraints gbc_textField = new GridBagConstraints();
-				gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textField.insets = new Insets(0, 0, 5, 5);
-				gbc_textField.gridx = 1;
-				gbc_textField.gridy = 1;
-				frame2.getContentPane().add(textfield, gbc_textField);
-				textfield.setColumns(10);
-				JLabel label_2 = new JLabel("");
-				GridBagConstraints gbc_label_2 = new GridBagConstraints();
-				gbc_label_2.fill = GridBagConstraints.BOTH;
-				gbc_label_2.insets = new Insets(0, 0, 0, 5);
-				gbc_label_2.gridx = 1;
-				gbc_label_2.gridy = 2;
-				frame2.getContentPane().add(label_2, gbc_label_2);
+				springLayout.putConstraint(SpringLayout.EAST, adminLabel, -12, SpringLayout.WEST, userfield);
+				springLayout.putConstraint(SpringLayout.EAST, userfield, -172, SpringLayout.EAST,
+						frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.WEST, userfield, 171, SpringLayout.WEST,
+						frame2.getContentPane());
+				frame2.getContentPane().add(userfield);
+				userfield.setColumns(10);
+				
+				JButton loginButton = new JButton("login");
+                loginButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        String username = userfield.getText();
+                        user = username;
+                        if (GEA.findUser(username) != null) {
+                            JOptionPane.showMessageDialog(frame2, "welcome", "login message", 1);
+                            System.out.println("success");
+                            frame2.dispose();
+                            switchToMainPanel(); // here the panel will switch to the shop if the login was successful
+                        } else {
+                            Icon f8mh = new ImageIcon("gamestore_project/src/gamestore_project/img/walrus.png");
+                            int result = JOptionPane.showOptionDialog(frame2,
+                                    "this account doesn't exist, do you want to create a new account", "oops",
+                                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, f8mh, null, null); //asks the user to create a new account if the name wasn't found
+                            if (result == JOptionPane.NO_OPTION) {
+                                JOptionPane.getRootFrame().dispose();
+                                frame2.setVisible(false);
+                            }
 
-				JButton btnNewButton = new JButton("login");
-				btnNewButton.addActionListener(new ActionListener() {
+                            else if (result == JOptionPane.YES_OPTION) { //if the user chose to create a new account
+                                String amount = JOptionPane.showInputDialog(null, "enter your wallet amount",
+                                        "register", JOptionPane.PLAIN_MESSAGE);
+                                double wlt = 0;
+                                try { // validation for wallet amount
+                                    wlt = Double.parseDouble(amount);
+                                    if (wlt < 0) {
+                                        JOptionPane.showMessageDialog(frame2, "please enter a positive number", "error",
+                                                JOptionPane.ERROR_MESSAGE);
+                                    } else { //adds the new user to the store
+                                        User u1 = new User(username, wlt);
+                                        GEA.addUser(u1);
+                                        JOptionPane.getRootFrame().dispose();
+                                        frame2.setVisible(false);
+                                        switchToMainPanel();
+                                    }
+                                } catch (NumberFormatException e2) {
+                                    JOptionPane.showMessageDialog(frame2, "please enter a number", "error",
+                                            JOptionPane.ERROR_MESSAGE);
+                                }
+                            }
+
+                        }
+                    }
+                });
+				
+				springLayout.putConstraint(SpringLayout.NORTH, userfield, -41, SpringLayout.NORTH, loginButton);
+				springLayout.putConstraint(SpringLayout.SOUTH, userfield, -15, SpringLayout.NORTH, loginButton);
+				springLayout.putConstraint(SpringLayout.NORTH, loginButton, -94, SpringLayout.SOUTH,
+						frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.EAST, loginButton, -197, SpringLayout.EAST,
+						frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.SOUTH, loginButton, -65, SpringLayout.SOUTH,
+						frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.WEST, loginButton, 196, SpringLayout.WEST,
+						frame2.getContentPane());
+				loginButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String username = textfield.getText();
-						user = username;
-						if (GEA.findUser(username) != null) {
-							JOptionPane.showMessageDialog(frame2, "welcome", "login message", 1);
-							System.out.println("success");
-							frame2.dispose();
-							switchToMainPanel(); // here the panel will switch to the shop if the login was successful
-						} else {
-							Icon f8mh = new ImageIcon("gamestore_project/src/gamestore_project/img/walrus.png");
-							int result = JOptionPane.showOptionDialog(frame2,
-									"this account doesn't exist, do you want to create a new account", "oops",
-									JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, f8mh, null, null); //asks the user to create a new account if the name wasn't found
-							if (result == JOptionPane.NO_OPTION) {
-								JOptionPane.getRootFrame().dispose();
-								frame2.setVisible(false);
-							}
 
-							else if (result == JOptionPane.YES_OPTION) { //if the user chose to create a new account
-								String amount = JOptionPane.showInputDialog(null, "enter your wallet amount",
-										"register", JOptionPane.PLAIN_MESSAGE);
-								double wlt = 0;
-								try { // validation for wallet amount
-									wlt = Double.parseDouble(amount);
-									if (wlt < 0) {
-										JOptionPane.showMessageDialog(frame2, "please enter a positive number", "error",
-												JOptionPane.ERROR_MESSAGE);
-									} else { //adds the new user to the store
-										User u1 = new User(username, wlt);
-										GEA.addUser(u1);
-										JOptionPane.getRootFrame().dispose();
-										frame2.setVisible(false);
-										switchToMainPanel();
-									}
-								} catch (NumberFormatException e2) {
-									JOptionPane.showMessageDialog(frame2, "please enter a number", "error",
-											JOptionPane.ERROR_MESSAGE);
-								}
-							}
-
-						}
 					}
-				});
-				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-				gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-				gbc_btnNewButton.gridx = 1;
-				gbc_btnNewButton.gridy = 2;
-				frame2.getContentPane().add(btnNewButton, gbc_btnNewButton);
 
-				JLabel label_3 = new JLabel("");
-				GridBagConstraints gbc_label_3 = new GridBagConstraints();
-				gbc_label_3.fill = GridBagConstraints.BOTH;
-				gbc_label_3.gridx = 2;
-				gbc_label_3.gridy = 2;
-				frame2.getContentPane().add(label_3, gbc_label_3);
+				});
+				frame2.getContentPane().add(loginButton);
+
+				JLabel blank = new JLabel("");
+				springLayout.putConstraint(SpringLayout.WEST, blank, 25, SpringLayout.WEST, frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.EAST, blank, -384, SpringLayout.EAST, frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.WEST, msg, 12, SpringLayout.EAST, blank);
+				springLayout.putConstraint(SpringLayout.NORTH, blank, -205, SpringLayout.SOUTH,
+						frame2.getContentPane());
+				springLayout.putConstraint(SpringLayout.SOUTH, blank, -141, SpringLayout.SOUTH,
+						frame2.getContentPane());
+				blank.setIcon(new ImageIcon("gamestore_project/src/gamestore_project/img/disco-ball.png"));
+				frame2.getContentPane().add(blank);
+				frame2.setBackground(new Color(45, 45, 45));
+				frame2.setBounds(450, 300, 473, 281);
 				frame2.setVisible(true);
 
 			}
@@ -1086,8 +1091,9 @@ public class GEAgamestore {
 													// information was correct, and shows a message accordingly. the
 													// admin then will enter the admin panel or the pop up will close.
 		adminButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {//opens the frame for admin login
+			public void actionPerformed(ActionEvent e) {// opens the frame for admin login
 				JFrame frame3 = new JFrame();
+				frame3.setResizable(false);
 				frame3.getContentPane().setBackground(UIManager.getColor("window"));
 				SpringLayout springLayout = new SpringLayout();
 				frame3.getContentPane().setLayout(springLayout);
@@ -1131,7 +1137,8 @@ public class GEAgamestore {
 				springLayout.putConstraint(SpringLayout.NORTH, loginButton, 25, SpringLayout.SOUTH, passwordField);
 				springLayout.putConstraint(SpringLayout.WEST, loginButton, 233, SpringLayout.WEST,
 						frame3.getContentPane());
-				loginButton.addActionListener(new ActionListener() {//checks if the admin exists and checks the username and the password
+				loginButton.addActionListener(new ActionListener() {// checks if the admin exists and checks the
+																	// username and the password
 					public void actionPerformed(ActionEvent e) {
 						adminName = userfield.getText();
 						String password = String.valueOf(passwordField.getPassword());
