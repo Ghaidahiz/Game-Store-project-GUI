@@ -59,6 +59,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
@@ -436,7 +437,7 @@ public class GEAgamestore {
 		Icon profileIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/boy.png");
 		Icon walletIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/money-bag (1).png");
 		String sWallet = GEA.findUser(user).getWallet() + "";
-		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Use FlowLayout with CENTER alignment
+		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); 
 		JLabel GELABEL11 = new JLabel("User: " + user + "  ", profileIcon, SwingConstants.CENTER);
 		JLabel GELABEL22 = new JLabel("Wallet: " + sWallet.substring(0, (sWallet.indexOf('.') + 2)), walletIcon,
 				SwingConstants.CENTER);
@@ -446,16 +447,18 @@ public class GEAgamestore {
 		Icon searchIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/zoom.png");
 		JButton searchInLib = new JButton("", searchIcon);
 		searchInLib.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { // if the user decided to search again for a game
-				String in = JOptionPane.showInputDialog("please enter the name of the game you are looking for");
+			public void actionPerformed(ActionEvent e) { // this button allows the users to search for a certain game in
+															// their library
+				String in = JOptionPane.showInputDialog("please enter the name of the user you are looking for");
 				try {
-					if (in == null || GEA.findUser(user).findGame(in) == null) { // if the game was not found or user
-																					// didn't enter anything
-						throw new GameNotFoundException(); // user defined exception
+					if (in == null || GEA.findUser(user) == null) { // if the admin didn't enter anything or
+																	// the user was not found
+						throw new UserNotFoundException(); // user defined exception
 					}
-				} catch (GameNotFoundException E) {
+				} catch (UserNotFoundException E) {
 				}
-				switchToSearchView(GEA.findUser(user).findGame(in));
+				switchToSearchView(GEA.findUser(user).findGame(in));// this displays the game that the user searched
+														// for
 			}
 		});
 
@@ -555,13 +558,130 @@ public class GEAgamestore {
 		// these methods to make sure that the panel switches and updates correctly ^^
 	}
 
+	public void switchToSearchView(User u) { // shows the user the admin searched for
+		JPanel mainPanel = new JPanel(new BorderLayout());
+
+		Icon adminIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/mask.png");
+		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); 
+		JLabel GELABEL11 = new JLabel("Admin: " + adminName + "  ", adminIcon, SwingConstants.CENTER);
+		JLabel GELABEL33 = new JLabel(
+				"                                                                                                                                                                    ",
+				SwingConstants.CENTER);		Icon searchIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/zoom.png");
+		JButton searchInStore = new JButton("", searchIcon);
+		searchInStore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { // this button allows the admin to search for a user
+				// their library
+				String in = JOptionPane.showInputDialog("please enter the name of the user you are looking for");
+				try {
+					if (in == null || GEA.findUser(in) == null) { // if the admin didn't enter anything or
+						// the user was not found
+						throw new UserNotFoundException(); // user defined exception
+					}
+				} catch (UserNotFoundException E) {
+				}
+				switchToSearchView(GEA.findUser(in)); // this displays the user that the admin searched for
+			}
+		});
+
+		titlePanel.add(GELABEL11);
+		titlePanel.add(GELABEL33);
+		titlePanel.add(searchInStore);
+
+		mainPanel.add(titlePanel, BorderLayout.NORTH);
+
+		Icon gamesIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/games.png");
+		JButton gameButton = new JButton("Games", gamesIcon);
+		gameButton.addActionListener(new ActionListener() {// to switch to the games pages
+			public void actionPerformed(ActionEvent e) {
+				switchToAdminPanel1();
+			}
+
+		});
+		Icon logoutIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/angel.png");
+		JButton logoutButton = new JButton("LOGOUT", logoutIcon);
+		logoutButton.addActionListener(new ActionListener() {// log out for the admin
+			public void actionPerformed(ActionEvent e) {
+				switchToLoginPage();
+			}
+
+		});
+		GridLayout grd = new GridLayout(2, 0, 2, 2);
+		JPanel btns = new JPanel(grd);
+		btns.add(gameButton);
+		btns.add(logoutButton);
+		mainPanel.add(btns, BorderLayout.EAST);
+
+		JPanel userGridPanel = new JPanel(new GridLayout(3, 3, 10, 10));
+
+		JPanel userPanel = new JPanel();
+		userPanel.setLayout(new BorderLayout());
+
+
+		Icon walletIconn = new ImageIcon("gamestore_project/src/gamestore_project/img/money-bag (1).png");
+		String wallet = "" + u.getWallet();
+		JLabel usernameLabel = new JLabel(u.getUsername() + " "
+				+ wallet.substring(0, (wallet.indexOf('.') + 2)) + " SAR", walletIconn, SwingConstants.CENTER);
+		usernameLabel.setHorizontalTextPosition(JLabel.LEFT);
+		userPanel.add(usernameLabel, BorderLayout.NORTH);
+
+		Icon userpic = new ImageIcon("gamestore_project/src/gamestore_project/img/bigboy.png");
+		JLabel imageLabel = new JLabel(userpic, SwingConstants.CENTER);
+		userPanel.add(imageLabel, BorderLayout.CENTER);
+
+		JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
+
+		Icon removeIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/cancel.png");
+
+		JButton removeButton = new JButton("", removeIcon);
+		JLabel blannk = new JLabel("");
+		JLabel blannkk = new JLabel("");
+
+		removeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { // this button allows the admin to remove a user's account
+															// from the store
+				GEA.removeUser(u.getUsername());
+				switchToAdminPanel2();
+			}
+
+		});
+
+
+		FlowLayout flow = new FlowLayout();
+		JPanel square = new JPanel(flow);
+		square.add(blannk);
+		square.add(removeButton);
+		square.add(blannkk);
+		// adds a square panel to the button panel to make the button square
+		buttonPanel.add(square);
+		// Add the button panel to the bottom of the user panel
+		userPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+		// Add the user to the user grid panel
+		userGridPanel.add(userPanel);
+
+		// Create JScrollPane for the user grid panel
+		JScrollPane scrollPane = new JScrollPane(userGridPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+		// Add the user grid panel with scroll pane to the center of the main panel
+		mainPanel.add(scrollPane, BorderLayout.CENTER);
+
+		// Set up frame's content pane
+		frame.getContentPane().removeAll();
+		frame.getContentPane().setLayout(new BorderLayout());
+		frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+		frame.revalidate();
+		frame.repaint();
+		// these methods to make sure that the panel switches and updates correctly ^^
+	}
+
 	public void switchToAdminPanel1() { // switches to the admin home page where they can manage the store's games
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		Icon adminIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/mask.png");
-		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Use FlowLayout with CENTER alignment
+		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); 
 		JLabel GELABEL11 = new JLabel("Admin: " + adminName + "  ", adminIcon, SwingConstants.CENTER);
 		JLabel GELABEL33 = new JLabel(
-				"                                                                                                                                                                                         ",
+				"                                                                                                                                                                    ",
 				SwingConstants.CENTER);
 		Icon addIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/add.png");
 
@@ -573,7 +693,7 @@ public class GEAgamestore {
 
 				try { // checks if the game already exists in the store and validates the price input
 					if (GEA.searchForGame(inGame) != null) {
-						throw new GameAlreadyExists(); // user defined exception
+						throw new GameAlreadyExistsException(); // user defined exception
 					} else if (inGame == null || inGame.isEmpty()) {
 						JOptionPane.showMessageDialog(null, "please enter the game's name", "Oh no :(", 0);
 					} else {
@@ -669,7 +789,7 @@ public class GEAgamestore {
 						}
 
 					}
-				} catch (GameAlreadyExists E1) {
+				} catch (GameAlreadyExistsException E1) {
 				}
 			}
 		});
@@ -785,11 +905,30 @@ public class GEAgamestore {
 										// account
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		Icon adminIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/mask.png");
-		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Use FlowLayout with CENTER alignment
+		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); 
 		JLabel GELABEL11 = new JLabel("Admin: " + adminName + "  ", adminIcon, SwingConstants.CENTER);
 		JLabel GELABEL33 = new JLabel(
-				"                                                                                                                                                                                         ",
+				"                                                                                                                                                                   ",
 				SwingConstants.CENTER);
+
+		Icon searchIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/zoom.png");
+		JButton searchInStore = new JButton("", searchIcon);
+		searchInStore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { // this button allows the users to search for a certain game in
+															// their library
+				String in = JOptionPane.showInputDialog("please enter the name of the user you are looking for");
+				try {
+					if (in == null || GEA.findUser(in) == null) { // if the admin didn't enter anything or
+																	// the user was not found
+						throw new UserNotFoundException(); // user defined exception
+					}
+				} catch (UserNotFoundException E) {
+				}
+				switchToSearchView(GEA.findUser(in)); // this displays the user that the user searched
+														// for
+			}
+		});
+
 		Icon addIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/add.png");
 
 		JButton addUser = new JButton("", addIcon);
@@ -800,7 +939,7 @@ public class GEAgamestore {
 
 				try { // checks if the user already exists in the store and validates the wallet input
 					if (GEA.findUser(inUser) != null) {
-						throw new UserAlreadyExists(); // user defined exception
+						throw new UserAlreadyExistsException(); // user defined exception
 					} else if (inUser == null || inUser.isEmpty()) {// if the admin didn't enter anything
 						JOptionPane.showMessageDialog(null, "please enter the user's name", "Oh no :(", 0);
 					} else { // validates the wallet
@@ -817,7 +956,7 @@ public class GEAgamestore {
 						}
 
 					}
-				} catch (UserAlreadyExists E1) {
+				} catch (UserAlreadyExistsException E1) {
 				} catch (NumberFormatException E2) {
 					JOptionPane.showMessageDialog(null, "please enter a number", "error", JOptionPane.ERROR_MESSAGE);
 				}
@@ -827,6 +966,7 @@ public class GEAgamestore {
 		titlePanel.add(GELABEL11);
 		titlePanel.add(GELABEL33);
 		titlePanel.add(addUser);
+		titlePanel.add(searchInStore);
 
 		mainPanel.add(titlePanel, BorderLayout.NORTH);
 
@@ -998,53 +1138,64 @@ public class GEAgamestore {
 						frame2.getContentPane());
 				frame2.getContentPane().add(userfield);
 				userfield.setColumns(10);
-				
+
 				JButton loginButton = new JButton("login");
-                loginButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        String username = userfield.getText();
-                        user = username;
-                        if (GEA.findUser(username) != null) {
-                            JOptionPane.showMessageDialog(frame2, "welcome", "login message", 1);
-                            System.out.println("success");
-                            frame2.dispose();
-                            switchToMainPanel(); // here the panel will switch to the shop if the login was successful
-                        } else {
-                            Icon f8mh = new ImageIcon("gamestore_project/src/gamestore_project/img/walrus.png");
-                            int result = JOptionPane.showOptionDialog(frame2,
-                                    "this account doesn't exist, do you want to create a new account", "oops",
-                                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, f8mh, null, null); //asks the user to create a new account if the name wasn't found
-                            if (result == JOptionPane.NO_OPTION) {
-                                JOptionPane.getRootFrame().dispose();
-                                frame2.setVisible(false);
-                            }
+				loginButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String username = userfield.getText();
+						user = username;
+						if (GEA.findUser(username) != null) {
+							JOptionPane.showMessageDialog(frame2, "welcome", "login message", 1);
+							System.out.println("success");
+							frame2.dispose();
+							switchToMainPanel(); // here the panel will switch to the shop if the login was successful
+						} else {
+							Icon f8mh = new ImageIcon("gamestore_project/src/gamestore_project/img/walrus.png");
+							int result = JOptionPane.showOptionDialog(frame2,
+									"this account doesn't exist, do you want to create a new account", "oops",
+									JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, f8mh, null, null); // asks
+																												// the
+																												// user
+																												// to
+																												// create
+																												// a new
+																												// account
+																												// if
+																												// the
+																												// name
+																												// wasn't
+																												// found
+							if (result == JOptionPane.NO_OPTION) {
+								JOptionPane.getRootFrame().dispose();
+								frame2.setVisible(false);
+							}
 
-                            else if (result == JOptionPane.YES_OPTION) { //if the user chose to create a new account
-                                String amount = JOptionPane.showInputDialog(null, "enter your wallet amount",
-                                        "register", JOptionPane.PLAIN_MESSAGE);
-                                double wlt = 0;
-                                try { // validation for wallet amount
-                                    wlt = Double.parseDouble(amount);
-                                    if (wlt < 0) {
-                                        JOptionPane.showMessageDialog(frame2, "please enter a positive number", "error",
-                                                JOptionPane.ERROR_MESSAGE);
-                                    } else { //adds the new user to the store
-                                        User u1 = new User(username, wlt);
-                                        GEA.addUser(u1);
-                                        JOptionPane.getRootFrame().dispose();
-                                        frame2.setVisible(false);
-                                        switchToMainPanel();
-                                    }
-                                } catch (NumberFormatException e2) {
-                                    JOptionPane.showMessageDialog(frame2, "please enter a number", "error",
-                                            JOptionPane.ERROR_MESSAGE);
-                                }
-                            }
+							else if (result == JOptionPane.YES_OPTION) { // if the user chose to create a new account
+								String amount = JOptionPane.showInputDialog(null, "enter your wallet amount",
+										"register", JOptionPane.PLAIN_MESSAGE);
+								double wlt = 0;
+								try { // validation for wallet amount
+									wlt = Double.parseDouble(amount);
+									if (wlt < 0) {
+										JOptionPane.showMessageDialog(frame2, "please enter a positive number", "error",
+												JOptionPane.ERROR_MESSAGE);
+									} else { // adds the new user to the store
+										User u1 = new User(username, wlt);
+										GEA.addUser(u1);
+										JOptionPane.getRootFrame().dispose();
+										frame2.setVisible(false);
+										switchToMainPanel();
+									}
+								} catch (NumberFormatException e2) {
+									JOptionPane.showMessageDialog(frame2, "please enter a number", "error",
+											JOptionPane.ERROR_MESSAGE);
+								}
+							}
 
-                        }
-                    }
-                });
-				
+						}
+					}
+				});
+
 				springLayout.putConstraint(SpringLayout.NORTH, userfield, -41, SpringLayout.NORTH, loginButton);
 				springLayout.putConstraint(SpringLayout.SOUTH, userfield, -15, SpringLayout.NORTH, loginButton);
 				springLayout.putConstraint(SpringLayout.NORTH, loginButton, -94, SpringLayout.SOUTH,
