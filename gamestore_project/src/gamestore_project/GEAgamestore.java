@@ -655,25 +655,25 @@ public class GEAgamestore {
 
 		mainPanel.add(titlePanel, BorderLayout.NORTH);
 
-		Icon gamesIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/games.png");
-		JButton gameButton = new JButton("Games", gamesIcon);
-		gameButton.addActionListener(new ActionListener() {// to switch to the games pages
+		Icon userIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/users.png");
+		JButton usersButton = new JButton("Users", userIcon);
+		usersButton.addActionListener(new ActionListener() { // this button switches to the page that contains all users
 			public void actionPerformed(ActionEvent e) {
-				switchToAdminPanel1();
+				switchToAdminPanel2();
 			}
 
 		});
 		Icon logoutIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/angel.png");
 		JButton logoutButton = new JButton("LOGOUT", logoutIcon);
-		logoutButton.addActionListener(new ActionListener() {// log out for the admin
-			public void actionPerformed(ActionEvent e) {
+		logoutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { // log out for admin
 				switchToLoginPage();
 			}
 
 		});
 		GridLayout grd = new GridLayout(2, 0, 2, 2);
 		JPanel btns = new JPanel(grd);
-		btns.add(gameButton);
+		btns.add(usersButton);
 		btns.add(logoutButton);
 		mainPanel.add(btns, BorderLayout.EAST);
 
