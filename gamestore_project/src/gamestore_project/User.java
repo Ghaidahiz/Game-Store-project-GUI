@@ -1,7 +1,6 @@
 package gamestore_project;
 
 import java.io.Serializable;
-import java.util.*;
 import javax.swing.*;
 public class User implements Serializable {
     private static final long serialVersionUID = -8958640915477320479L; // Match the serialVersionUID of the serialized class
@@ -9,7 +8,6 @@ public class User implements Serializable {
 	private int numberOfGames;
 	private double wallet;
 	private Game[] gameLibrary = new Game[50];
-	Scanner sc = new Scanner(System.in);
 
 	public User(String n, double wallet) { //a paramitrized constructor that sets the values for the attributes
 		username = n;
