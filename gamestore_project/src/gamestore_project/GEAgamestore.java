@@ -433,72 +433,73 @@ public class GEAgamestore {
 
 	public void switchToSearchView(Game g) { // shows the game the user searched for in their library
 		JPanel mainPanel = new JPanel(new BorderLayout());
-
+	 
 		Icon profileIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/boy.png");
 		Icon walletIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/money-bag (1).png");
 		String sWallet = GEA.findUser(user).getWallet() + "";
-		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); 
+		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Use FlowLayout with CENTER alignment
 		JLabel GELABEL11 = new JLabel("User: " + user + "  ", profileIcon, SwingConstants.CENTER);
 		JLabel GELABEL22 = new JLabel("Wallet: " + sWallet.substring(0, (sWallet.indexOf('.') + 2)), walletIcon,
-				SwingConstants.CENTER);
+			   SwingConstants.CENTER);
 		JLabel GELABEL33 = new JLabel(
-				"                                                                                                                                             ",
-				SwingConstants.CENTER);
+			   "                                                                                                                                             ",
+			   SwingConstants.CENTER);
 		Icon searchIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/zoom.png");
 		JButton searchInLib = new JButton("", searchIcon);
-		searchInLib.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { // this button allows the users to search for a certain game in
-															// their library
-				String in = JOptionPane.showInputDialog("please enter the name of the user you are looking for");
-				try {
-					if (in == null || GEA.findUser(user) == null) { // if the admin didn't enter anything or
-																	// the user was not found
-						throw new UserNotFoundException(); // user defined exception
+		searchInLib.addActionListener(
+		   new ActionListener() {
+			  public void actionPerformed(ActionEvent e) { // if the user decided to search again for a game
+				 String in = JOptionPane.showInputDialog("please enter the name of the game you are looking for");
+				 try {
+					if (in == null || GEA.findUser(user).findGame(in) == null) { // if the game was not found or user
+																				// didn't enter anything
+					   throw new GameNotFoundException(); // user defined exception
 					}
-				} catch (UserNotFoundException E) {
+				 } catch (GameNotFoundException E) {
+				 }
+				 switchToSearchView(GEA.findUser(user).findGame(in));
 				}
-				switchToSearchView(GEA.findUser(user).findGame(in));// this displays the game that the user searched
-														// for
-			}
-		});
-
+		   });
+	 
 		titlePanel.add(GELABEL11);
 		titlePanel.add(GELABEL22);
 		titlePanel.add(GELABEL33);
 		titlePanel.add(searchInLib);
-
+	 
 		mainPanel.add(titlePanel, BorderLayout.NORTH);
-
+	 
 		Icon homeIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/home.png");
 		JButton homeButton = new JButton("Go Home", homeIcon);
-		homeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { // goes back to the home page
-				switchToMainPanel();
-			}
-
-		});
+		homeButton.addActionListener(
+		   new ActionListener() {
+			  public void actionPerformed(ActionEvent e) { // goes back to the home page
+				 switchToMainPanel();
+			  }
+		   
+		   });
 		Icon logoutIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/angel.png");
 		JButton logoutButton = new JButton("LOGOUT", logoutIcon);
-		logoutButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { // logs out
-				switchToLoginPage();
-			}
-
-		});
+		logoutButton.addActionListener(
+		   new ActionListener() {
+			  public void actionPerformed(ActionEvent e) { // logs out
+				 switchToLoginPage();
+			  }
+		   
+		   });
 		GridLayout grd = new GridLayout(2, 0, 2, 2);
 		JPanel btns = new JPanel(grd);
 		btns.add(homeButton);
 		btns.add(logoutButton);
 		mainPanel.add(btns, BorderLayout.EAST);
-
-		JPanel gameGridPanel = new JPanel(new GridLayout(3, 3, 10, 10));
-
+	 
+		JPanel gameGridPanel = new JPanel(new GridLayout(3, 3, 10, 10)); 
+	 
 		JPanel gamePanel = new JPanel();
 		gamePanel.setLayout(new BorderLayout());
-
+	 
 		JLabel gameNameLabel = new JLabel(g.getName(), SwingConstants.CENTER);
 		gamePanel.add(gameNameLabel, BorderLayout.NORTH);
-
+	 
 		String fullname = g.getName() + " ";
 		int space = fullname.indexOf(" ");
 		String cutname = fullname.substring(0, space + 1);
@@ -506,59 +507,59 @@ public class GEAgamestore {
 		File gamefile = new File("gamestore_project/src/gamestore_project/img/" + cutname + ".png");
 		if (gamefile.exists()) {// if the game picture was found, it will be displayed here, otherwise, the
 								// default picture (the crown) will appear
-			JLabel imageLabel = new JLabel(gamepic, SwingConstants.CENTER);
-			gamePanel.add(imageLabel, BorderLayout.CENTER);
+		   JLabel imageLabel = new JLabel(gamepic, SwingConstants.CENTER);
+		   gamePanel.add(imageLabel, BorderLayout.CENTER);
 		} else {
-			Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1 .png");
-			JLabel imageLabel1 = new JLabel(defaultpic, SwingConstants.CENTER);
-			gamePanel.add(imageLabel1, BorderLayout.CENTER);
+		   Icon defaultpic = new ImageIcon("gamestore_project/src/gamestore_project/img/Untitled-1 .png");
+		   JLabel imageLabel1 = new JLabel(defaultpic, SwingConstants.CENTER);
+		   gamePanel.add(imageLabel1, BorderLayout.CENTER);
 		}
-
+	 
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
 		Icon delIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/cancel.png");
-		JButton delButton = new JButton("", delIcon);
-
-		delButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {// delete button to delete a game in library
-				(GEA.findUser(user)).removeGameFromLibrary((g.getName()));
-				switchToLibrary();
-			}
-
-		});
 		JButton removeButton = new JButton("", delIcon);
 		JLabel blannk = new JLabel("");
 		JLabel blannkk = new JLabel("");
 
+		removeButton.addActionListener(
+		   new ActionListener() {
+			  public void actionPerformed(ActionEvent e) {// delete button to delete a game in library
+				 GEA.findUser(user).removeGameFromLibrary(g.getName());
+				 switchToLibrary();
+			  }
+		   
+		   });
+	 
 		FlowLayout flow = new FlowLayout();
 		JPanel square = new JPanel(flow);
 		square.add(blannk);
 		square.add(removeButton);
 		square.add(blannkk);
-		// adds a square panel to the button panel to make the button square
+		 // adds a square panel to the button panel to make the button square
 		buttonPanel.add(square);
-		// Add the button panel to the bottom of the game panel
+		 // Add the button panel to the bottom of the game panel
 		gamePanel.add(buttonPanel, BorderLayout.SOUTH);
-
-		// Add the game panel to the game grid panel
+	 
+		 // Add the game panel to the game grid panel
 		gameGridPanel.add(gamePanel);
-
-		// Create JScrollPane for the game grid panel
+	 
+		 // Create JScrollPane for the game grid panel
 		JScrollPane scrollPane = new JScrollPane(gameGridPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-		// Add the game grid panel with scroll pane to the center of the main panel
+			   JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	 
+		 // Add the game grid panel with scroll pane to the center of the main panel
 		mainPanel.add(scrollPane, BorderLayout.CENTER);
-
-		// Set up frame's content pane
+	 
+		 // Set up frame's content pane
 		frame.getContentPane().removeAll();
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 		frame.revalidate();
 		frame.repaint();
-		// these methods to make sure that the panel switches and updates correctly ^^
-	}
-
-	public void switchToSearchView(User u) { // shows the user the admin searched for
+		 // these methods to make sure that the panel switches and updates correctly ^^
+	 }
+  
+	  public void switchToSearchView(User u) { // shows the user the admin searched for
 		JPanel mainPanel = new JPanel(new BorderLayout());
 
 		Icon adminIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/mask.png");
