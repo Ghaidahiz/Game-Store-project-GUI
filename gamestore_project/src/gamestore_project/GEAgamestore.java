@@ -180,71 +180,69 @@ public class GEAgamestore {
 		Icon geaIconSmall = new ImageIcon("gamestore_project/src/gamestore_project/img/crown (2).png");
 		JLabel welcomeLabel = new JLabel(" Welcome back! Take a look around GEA store", geaIconSmall,
 				SwingConstants.CENTER);
-				Icon filterIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/filter (1).png");
-				JButton filter = new JButton("", filterIcon);
-				filter.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) { // if the user decided to filter games by genre
-						FlowLayout flow = new FlowLayout();
-						JPanel genrePanel = new JPanel(flow);
-		
-						String[] genres = { "", "Horror", "RPG", "Story-Rich", "Detective", "Survival" };
-		
-						JComboBox<String> comboBox = new JComboBox<>(genres); // this is a drop down list containing the
-																				// genres in order to initialize the new
-																				// game
-		
-						comboBox.setBounds(196, 209, 153, 27);
-						JLabel lblGenre = new JLabel("Genre:");
-						lblGenre.setBounds(138, 213, 47, 16);
-		
-						genrePanel.add(lblGenre);
-						genrePanel.add(comboBox);
-		
-						int result = JOptionPane.showConfirmDialog(null, genrePanel, "filter by game genre",
-								JOptionPane.OK_CANCEL_OPTION);
-		
-						if (result == JOptionPane.OK_OPTION) {
-							String genre = (String) comboBox.getSelectedItem();// this line stores the user's genre
-																				// choice in a string
-		
-							if (!genre.isEmpty()) {
-								switch (genre) {
-								case "Horror":
-									displayGames(GEA.getHorror());
-									break;
-								case "RPG":
-									displayGames(GEA.getRPG());
-									break;
-								case "Story-Rich":
-									displayGames(GEA.getStoryRich());
-									break;
-								case "Detective":
-									displayGames(GEA.getDetective());
-									break;
-								case "Survival":
-									displayGames(GEA.getDetective());
-									break;
-								}
-							} else {
-								JOptionPane.showMessageDialog(null, "Please choose a genre", "Oops", JOptionPane.ERROR_MESSAGE); // if
-																																	// admin
-																																	// didn't
-																																	// choose
-																																	// a
-																																	// genre
-							}
-		
+		Icon filterIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/filter (1).png");
+		JButton filter = new JButton("", filterIcon);
+		filter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { // if the user decided to filter games by genre
+				FlowLayout flow = new FlowLayout();
+				JPanel genrePanel = new JPanel(flow);
+
+				String[] genres = { "", "Horror", "RPG", "Story-Rich", "Detective", "Survival" };
+
+				JComboBox<String> comboBox = new JComboBox<>(genres); // this is a drop down list containing the
+																		// genres in order to initialize the new
+																		// game
+
+				comboBox.setBounds(196, 209, 153, 27);
+				JLabel lblGenre = new JLabel("Genre:");
+				lblGenre.setBounds(138, 213, 47, 16);
+
+				genrePanel.add(lblGenre);
+				genrePanel.add(comboBox);
+
+				int result = JOptionPane.showConfirmDialog(null, genrePanel, "filter by game genre",
+						JOptionPane.OK_CANCEL_OPTION);
+
+				if (result == JOptionPane.OK_OPTION) {
+					String genre = (String) comboBox.getSelectedItem();// this line stores the user's genre
+																		// choice in a string
+
+					if (!genre.isEmpty()) {
+						switch (genre) {
+						case "Horror":
+							displayGames(GEA.getHorror());
+							break;
+						case "RPG":
+							displayGames(GEA.getRPG());
+							break;
+						case "Story-Rich":
+							displayGames(GEA.getStoryRich());
+							break;
+						case "Detective":
+							displayGames(GEA.getDetective());
+							break;
+						case "Survival":
+							displayGames(GEA.getSurvival());
+							break;
 						}
-		
+					} else {
+						JOptionPane.showMessageDialog(null, "Please choose a genre", "Oops", JOptionPane.ERROR_MESSAGE); // if
+																															// admin
+																															// didn't
+																															// choose
+																															// a
+																															// genre
 					}
-				});
-		
-				JLabel GELABEL33 = new JLabel(
-			"                                                                   ",
-			SwingConstants.CENTER);  
-			JLabel GELABEL44 = new JLabel(       
-			"                                                                         ",
-			SwingConstants.CENTER);
+
+				}
+
+			}
+		});
+
+		JLabel GELABEL33 = new JLabel("                                                                   ",
+				SwingConstants.CENTER);
+		JLabel GELABEL44 = new JLabel("                                                                         ",
+				SwingConstants.CENTER);
 
 		welcomePanel.add(GELABEL33);
 		welcomePanel.add(welcomeLabel);
@@ -511,9 +509,9 @@ public class GEAgamestore {
 		JLabel GELABEL11 = new JLabel("User: " + user + "  ", profileIcon, SwingConstants.CENTER);
 		JLabel GELABEL22 = new JLabel("Wallet: " + sWallet.substring(0, (sWallet.indexOf('.') + 2)), walletIcon,
 				SwingConstants.CENTER);
-				JLabel GELABEL33 = new JLabel(
-					"                                                                                                                                                              ",
-					SwingConstants.CENTER);
+		JLabel GELABEL33 = new JLabel(
+				"                                                                                                                                                              ",
+				SwingConstants.CENTER);
 		Icon searchIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/zoom.png");
 		JButton searchInLib = new JButton("", searchIcon);
 		searchInLib.addActionListener(new ActionListener() {
@@ -533,30 +531,29 @@ public class GEAgamestore {
 		titlePanel.add(GELABEL11);
 		titlePanel.add(GELABEL22);
 		titlePanel.add(GELABEL33);
-		
+
 		titlePanel.add(searchInLib);
 
 		mainPanel.add(titlePanel, BorderLayout.NORTH);
 
-		Icon homeIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/home.png");
-		JButton homeButton = new JButton("Go Home", homeIcon);
-		homeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { // goes back to the home page
-				switchToMainPanel();
+		JButton profileButton = new JButton("My Profile", profileIcon);
+		profileButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchToLibrary(); // this button switches the panel to the user's library
 			}
 
 		});
 		Icon logoutIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/angel.png");
 		JButton logoutButton = new JButton("LOGOUT", logoutIcon);
 		logoutButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { // logs out
-				switchToLoginPage();
+			public void actionPerformed(ActionEvent e) {
+				switchToLoginPage(); // this button switches the panel to the login page
 			}
 
 		});
 		GridLayout grd = new GridLayout(2, 0, 2, 2);
 		JPanel btns = new JPanel(grd);
-		btns.add(homeButton);
+		btns.add(profileButton);
 		btns.add(logoutButton);
 		mainPanel.add(btns, BorderLayout.EAST);
 
@@ -1420,32 +1417,100 @@ public class GEAgamestore {
 		JLabel welcomeLabel = new JLabel(" Welcome back! Take a look around GEA store", geaIconSmall,
 				SwingConstants.CENTER);
 		welcomePanel.add(welcomeLabel);
+		JLabel GELABEL33 = new JLabel("                                                                   ",
+				SwingConstants.CENTER);
+		JLabel GELABEL44 = new JLabel("                                                                         ",
+				SwingConstants.CENTER);
+				Icon filterIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/filter (1).png");
+				JButton filter = new JButton("", filterIcon);
+				filter.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) { // if the user decided to filter games by genre
+						FlowLayout flow = new FlowLayout();
+						JPanel genrePanel = new JPanel(flow);
+		
+						String[] genres = { "", "Horror", "RPG", "Story-Rich", "Detective", "Survival" };
+		
+						JComboBox<String> comboBox = new JComboBox<>(genres); // this is a drop down list containing the
+																				// genres in order to initialize the new
+																				// game
+		
+						comboBox.setBounds(196, 209, 153, 27);
+						JLabel lblGenre = new JLabel("Genre:");
+						lblGenre.setBounds(138, 213, 47, 16);
+		
+						genrePanel.add(lblGenre);
+						genrePanel.add(comboBox);
+		
+						int result = JOptionPane.showConfirmDialog(null, genrePanel, "filter by game genre",
+								JOptionPane.OK_CANCEL_OPTION);
+		
+						if (result == JOptionPane.OK_OPTION) {
+							String genre = (String) comboBox.getSelectedItem();// this line stores the user's genre
+																				// choice in a string
+		
+							if (!genre.isEmpty()) {
+								switch (genre) {
+								case "Horror":
+									displayGames(GEA.getHorror());
+									break;
+								case "RPG":
+									displayGames(GEA.getRPG());
+									break;
+								case "Story-Rich":
+									displayGames(GEA.getStoryRich());
+									break;
+								case "Detective":
+									displayGames(GEA.getDetective());
+									break;
+								case "Survival":
+								displayGames(GEA.getSurvival());
+								break;
+								}
+							} else {
+								JOptionPane.showMessageDialog(null, "Please choose a genre", "Oops", JOptionPane.ERROR_MESSAGE); // if
+																																	// admin
+																																	// didn't
+																																	// choose
+																																	// a
+																																	// genre
+							}
+		
+						}
+		
+					}
+				});
+		
+		
+		welcomePanel.add(GELABEL33);
+		welcomePanel.add(welcomeLabel);
+		welcomePanel.add(GELABEL44);
+		welcomePanel.add(filter);
 		mainPanel.add(welcomePanel, BorderLayout.NORTH);
-		Icon profileIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/dancing (1).png");
-		JButton profileButton = new JButton("My Profile", profileIcon);
-		profileButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchToLibrary(); // this button switches the panel to the user's library
+		Icon homeIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/home.png");
+		JButton homeButton = new JButton("Go Home", homeIcon);
+		homeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { // this button makes the user go to the home page
+				switchToMainPanel();
 			}
 
 		});
 		Icon logoutIcon = new ImageIcon("gamestore_project/src/gamestore_project/img/angel.png");
 		JButton logoutButton = new JButton("LOGOUT", logoutIcon);
 		logoutButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchToLoginPage(); // this button switches the panel to the login page
+			public void actionPerformed(ActionEvent e) {// this button makes the user logout
+				switchToLoginPage();
 			}
 
 		});
 		GridLayout grd = new GridLayout(2, 0, 2, 2);
 		JPanel btns = new JPanel(grd);
-		btns.add(profileButton);
+		btns.add(homeButton);
 		btns.add(logoutButton);
 		mainPanel.add(btns, BorderLayout.EAST);
 
 		JPanel gameGridPanel = new JPanel(new GridLayout(0, 3, 10, 10));
 		for (int i = 0; i < arr.length; i++) { // a loop to display all games with their pictures and prices, and
-														// buttons to buy or gift them
+												// buttons to buy or gift them
 			final int index = i;
 
 			JPanel gamePanel = new JPanel();
@@ -1454,7 +1519,7 @@ public class GEAgamestore {
 			Icon price = new ImageIcon("gamestore_project/src/gamestore_project/img/coin (2).png");
 			String priceAfterDiscount2 = "" + arr[index].priceAfterDiscount();
 			JLabel gameNameLabel = new JLabel(
-				arr[index].getName() + " "
+					arr[index].getName() + " "
 							+ priceAfterDiscount2.substring(0, (priceAfterDiscount2.indexOf('.') + 2)) + " SAR",
 					price, SwingConstants.CENTER);
 			gameNameLabel.setHorizontalTextPosition(JLabel.LEFT);
@@ -1502,12 +1567,12 @@ public class GEAgamestore {
 								"error", JOptionPane.ERROR_MESSAGE);
 					} else {// if the friend was found (in users)
 						GEA.findUser(user).sendGift(GEA.findUser(Fname), arr[index]); // the game will be
-																									// bought and sent
-																									// to the friend
-																									// library if it
-																									// exists in the
-																									// store (see
-																									// methods)
+																						// bought and sent
+																						// to the friend
+																						// library if it
+																						// exists in the
+																						// store (see
+																						// methods)
 
 					}
 				}
