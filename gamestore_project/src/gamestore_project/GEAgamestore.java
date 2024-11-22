@@ -7,9 +7,9 @@ and it contains a lot of games of different genres that
 the user can interact with e.g.(buy, remove, send as a gift..etc).
 
 Authors:
- Almaha Alaiban - 444200477 
- Eman Qaed - 444200073 
- Ghaida Alzaidan - 444201103 
+ Almaha Alaiban -  
+ Eman Qaed -  
+ Ghaida Alzaidan -  
 */
 package gamestore_project;
 
